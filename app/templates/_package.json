@@ -1,0 +1,15 @@
+{
+  "name": "nc-static",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "start": "grunt && grunt serve"
+  },
+  "devDependencies": {
+      "grunt": ">=0.4.5",
+      "grunt-closure-soy": ">=0.2.0",
+      "grunt-contrib-less": ">=0.11.4",
+      "grunt-contrib-watch": ">=0.6.1",
+      "grunt-soy-compile": ">=0.5.3"
+  }
+}

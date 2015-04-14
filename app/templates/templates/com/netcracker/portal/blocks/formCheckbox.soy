@@ -1,0 +1,15 @@
+{namespace com.netcracker.portal.blocks.formCheckbox}
+
+/**
+ * Form Checkbox
+ * @param field
+ */
+{template .view}
+    <label class="form-checkbox js-checkbox taCheck">
+        <input class="form-checkbox__input taEditElement" type="checkbox" id="{$field.id}" name="{$field.id}" value="true"
+            {if $field.value}{sp}checked{/if}
+        />
+        <i class="form-checkbox__icon"></i>
+        <span class="form-checkbox__label taLabel">{$field.name}</span>
+    </label>
+{/template}

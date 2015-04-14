@@ -1,0 +1,29 @@
+<!doctype html>
+<html lang="en-US">
+<head>
+    <!--soyutils.js нужно для сой компайлера-->
+    <script type="text/javascript" src="../../js/soyutils.js"></script>
+    <!--подключаю основные файлы-->
+    <script type="text/javascript" src="../../js/common/head.soy.js"></script>
+    <script>
+        document.write(com.netcracker.portal.common.head.view({
+            title: "Landing Page"
+        }));
+    </script>
+</head>
+<body>
+
+<div class="page">
+    <div class="page__layout">
+        <!--Пример подключения сойки-->
+        <script>
+            document.write(com.netcracker.portal.blocks.header.view({}));
+        </script>
+    </div>
+</div>
+
+<script type="text/javascript">
+</script>
+
+</body>
+</html>

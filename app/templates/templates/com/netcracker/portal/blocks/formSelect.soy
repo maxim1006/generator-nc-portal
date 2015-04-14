@@ -1,0 +1,26 @@
+{namespace com.netcracker.portal.blocks.formSelect}
+
+/**
+ * Form Select
+ * @param field
+ */
+{template .view}
+    <div class="form-select taCombobox taValue {if $field.errorMsg} form-select_error{/if} {if $field.isInline}form-select_inline{/if}" >
+
+        {if $field.label}<label class="form-label {$field.label.class}" for="{$field.id}">{$field.label.text}</label>{/if}
+
+        {if $field.errorMsg}<span class="form-select__message">{$field.errorMsg}</span>{/if}
+
+         <select class="form-select__select" name="{$field.id}" id="{$field.id}">
+             {foreach $option in $field.selectOptions}
+                <option
+                    class="form-select__option"
+                    value="{$option.value}"
+                    {if $option.value==$field.value}selected{/if}>
+                    {$option.value}
+                </option>
+             {/foreach}
+         </select>
+
+    </div>
+{/template}

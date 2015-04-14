@@ -1,0 +1,33 @@
+{
+  "name": "generator-nc-portal",
+  "version": "0.1.13",
+  "description": "Deployment of the static grunt project for portals",
+  "keywords": [
+    "nc-portal",
+    "generator-nc-portal"
+  ],
+  "author": {
+    "name": "Maxim Maximov",
+    "email": "maxim1006@list.ru",
+    "url": "https://github.com/maxim1006"
+  },
+  "main": "app/index.js",
+  "repository": {
+    "type": "git",
+    "url": "http://github.com/maxim1006/generator-nc-portal.git"
+  },
+  "dependencies": {
+    "yeoman-generator": ">=0.17.1"
+  },
+  "engines": {
+    "node": ">=0.10.0"
+  },
+  "licenses": "MIT",
+  "readme": "#Yeoman generator for a frontend developer\n\n###usage\n\nYou have to have pre installed <b>\"Node.js\", \"Bower\", \"Yeoman\"</b>\n\n<a href=\"http://nodejs.org/\">http://nodejs.org/</a> <br/>\n<a href=\"http://bower.io/\">http://bower.io/</a> <br/>\n<a href=\"http://yeoman.io/\">http://yeoman.io/</a>\n\nCreate a folder, open cmd/console and navigate to that folder.\n\nType:<br/><br/>\n1) npm i generator-nc-portal<br/>\n2) yo nc-portal<br/>\n3) grunt\n\n### License\n[MIT License](http://en.wikipedia.org/wiki/MIT_License)\n",
+  "readmeFilename": "README.md",
+  "bugs": {
+    "url": "https://github.com/maxim1006/generator-nc-portal/issues"
+  },
+  "_id": "generator-nc-portal@0.1.12",
+  "_from": "generator-nc-portal@"
+}

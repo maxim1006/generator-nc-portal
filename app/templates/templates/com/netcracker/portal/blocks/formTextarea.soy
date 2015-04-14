@@ -1,0 +1,21 @@
+{namespace com.netcracker.portal.blocks.formTextarea}
+
+/**
+ * Form Select
+ * @param field
+ */
+{template .view}
+    <div class="form-textarea{if $field.errorMsg} form-select_error{/if} taTextEdit taLabel taValue" >
+        {if $field.errorMsg}<span class="form-select__message">{$field.errorMsg}</span>{/if}
+         <textarea class="form-textarea__textarea {if $field.disabled}_disabled{/if} taEditElement"
+         {sp}type="{$field.type}"
+         {sp}id="{$field.id}"
+         {sp}name="{$field.id}"
+         {if $field.placeholder}{sp}placeholder="{$field.placeholder}"{/if}
+         {if $field.disabled}{sp}disabled{/if}
+    >
+             {if isNonnull($field.value)}{$field.value}{/if}
+         </textarea>
+         {if $field.errorMsg}<span class="form-textarea__message">{$field.errorMsg}</span>{/if}
+    </div>
+{/template}

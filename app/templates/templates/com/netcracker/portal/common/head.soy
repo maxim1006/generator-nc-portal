@@ -1,0 +1,81 @@
+{namespace com.netcracker.portal.common.head}
+
+/**
+ * HTML Head
+ * @param? title
+ */
+{template .view}
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=9">
+
+    <title>{$title}</title>
+    <link rel="stylesheet" href="../../css/custom.css">
+
+    // jQuery
+    <script type="text/javascript" src="../../js/libs/jquery-2.1.3.min.js"></script>
+
+    {call .blocks}
+        {param blocks: [
+            'button',
+            'formAddress',
+            'formCheckbox',
+            'formHidden',
+            'formInput',
+            'formLayout',
+            'formRadio',
+            'formSelect',
+            'formTextarea'
+        ] /}
+    {/call}
+
+    {call .commons}
+        {param commons: [
+            'head',
+        ] /}
+    {/call}
+
+
+    {call .portlets}
+        {param portlets: [
+            'appointment/appointment',
+        ] /}
+    {/call}
+
+
+{/template}
+
+
+
+/**
+ * blocks
+ * @param? blocks
+ */
+{template .blocks}
+    {foreach $block in $blocks}
+        <script type="text/javascript" src="../../js/blocks/{$block}.soy.js"></script>
+    {/foreach}
+{/template}
+
+
+
+/**
+ * common
+ * @param? commons
+ */
+{template .commons}
+    {foreach $commonItem in $commons}
+        <script type="text/javascript" src="../../js/common/{$commonItem}.soy.js"></script>
+    {/foreach}
+{/template}
+
+
+
+/**
+ * portlets
+ * @param? portlets
+ */
+{template .portlets}
+    {foreach $portlet in $portlets}
+        <script type="text/javascript" src="../../js/portlets/{$portlet}.soy.js"></script>
+    {/foreach}
+{/template}

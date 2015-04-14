@@ -1,0 +1,18 @@
+{namespace com.netcracker.portal.blocks.button}
+
+/**
+ * Block button
+ * @param class
+ * @param text
+ * @param? type
+ * @param? id
+ */
+{template .view}
+    <button{sp}
+    {if $type}type="{$type}"{/if}{sp}
+    {if $id}id="{$id}"{/if}{sp}
+    class="{$class} taButton">
+        <i class="nav-button__loader"></i>
+        <span class="button__text taLabel">{$text}</span>
+    </button>
+{/template}

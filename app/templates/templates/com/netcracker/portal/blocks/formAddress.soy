@@ -1,0 +1,14 @@
+{namespace com.netcracker.portal.blocks.formAddress}
+
+/**
+ * Form Address
+ * @param field
+ */
+{template .view}
+    <div class="form-input{if $field.errorMsg} form-input_error{/if}  taLabel" >
+        <div class="form-input__{$field.type}" id="{$field.id}">
+            {$field.value}
+            {if $field.errorMsg}<span class="form-input__message">{$field.errorMsg}</span>{/if}
+        </div>
+    </div>
+{/template}

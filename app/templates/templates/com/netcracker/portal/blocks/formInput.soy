@@ -1,0 +1,25 @@
+{namespace com.netcracker.portal.blocks.formInput}
+
+/**
+ * Form Input
+ * @param field
+ */
+{template .view}
+    <div class="form-input{if $field.errorMsg} form-input_error{/if} taTextEdit taValue">
+
+        {if $field.label}<label class="form-label {$field.label.class}" {if $field.id}for="{$field.id}"{/if}>{$field.label.text|noAutoescape}</label>{/if}
+
+        <input class="form-input__input {if $field.class}{$field.class}{/if} {if $field.disabled}_disabled{/if} taEditElement" type="{$field.type}"
+            {if $field.id}{sp}id="{$field.id}"{/if}
+            {if $field.name and $field.id}{sp}name="{$field.id}"{/if}
+            {if $field.value}{sp}value="{$field.value}"{/if}
+            {if $field.placeholder}{sp}placeholder="{$field.placeholder}"{/if}
+            {if $field.size}{sp}size="{$field.size}"{/if}
+            {if $field.disabled}{sp}disabled{/if}
+        />
+
+        {if $field.placeholder}<span class="form-input__placeholder jsFormInputPlaceholder" {sp}{if $field.id}id="{$field.id}placeholder"{/if}>{$field.placeholder}</span>{/if}
+
+        {if $field.errorMsg}<span class="form-input__message">{$field.errorMsg}</span>{/if}
+    </div>
+{/template}

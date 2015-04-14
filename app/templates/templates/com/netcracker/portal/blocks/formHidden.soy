@@ -1,0 +1,16 @@
+{namespace com.netcracker.portal.blocks.formHidden}
+
+/**
+ * Form Select
+ * @param field
+ */
+{template .view}
+        <div class="form__column"></div>
+        <div class="form__column form__column_hidden">
+            <div class="form-select taValue {if $field.errorMsg} form-select_error{/if}" >
+             <input id="{$field.id}" name="{$field.id}" type="hidden" value="{$field.value}"/>
+                {if $field.errorMsg}<span class="form-select__message">{$field.errorMsg}</span>{/if}
+            </div>
+        </div>
+
+{/template}

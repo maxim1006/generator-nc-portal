@@ -1,0 +1,207 @@
+{namespace com.netcracker.portal.portlets.appointment.appointment}
+
+/**
+ * Appointment
+ * @param dayCells
+ * @param? selectedTime
+ * @param technicianInfo
+ * @param editable
+ */
+{template .view}
+
+    <div class="js-wrapper">
+
+        {if isNonnull($dayCells)}
+
+            <div class="appointment">
+
+                {call .header}
+                    {param selectedTime: $selectedTime /}
+                {/call}
+
+                {call .calendar}
+                    {param dayCells: $dayCells /}
+                    {param editable: $editable /}
+                {/call}
+
+                <footer id="js-navigation" class="appointment__footer">
+                    {call .navigation}
+                        {param previousEnabled: false /}
+                        {param nextEnabled: true /}
+                    {/call}
+                </footer>
+
+                {call com.netcracker.portal.portlets.appointment.technicianinfopopup.view}
+                    {param technicianInfo: $technicianInfo /}
+                    {param editable: $editable /}
+                {/call}
+
+                {call com.netcracker.portal.portlets.appointment.notavailablepopup.view /}
+
+            </div>
+
+        {else}
+            {call com.netcracker.portal.portlets.appointment.unavailableReservation.view /}
+        {/if}
+
+    </div>
+
+{/template}
+
+/**
+ * Header
+ * @param? selectedTime
+ */
+{template .header}
+    <header class="appointment__header">
+        <div class="appointment__header-item appointment__header-item_narrow">Please select your installation time. Your selected time will be reserved for 5 minutes upon clicking CONTINUE. Should the time exceed 5 minutes before clicking CONTINUE, you will be prompted to try again.</div>
+        <div class="appointment__header-item appointment__header-item_wide">
+            <div class="appointment__header-info appointment__header-info_wide">
+                <p class="appointment__header-text">
+                    The technician will arrive anytime between
+                </p>
+                <p id="js-selectedTime" class="appointment__header-text appointment__header-text_date">
+                    {call .selectedTime}
+                        {param selectedTime: $selectedTime /}
+                    {/call}
+                </p>
+            </div>
+            <div class="appointment__header-info">
+                <a class="appointment__header-link js-technicianInfoPopup-show" href="#">Feel free to provide any additional instructions for your technician here</a>
+            </div>
+        </div>
+    </header>
+{/template}
+
+/**
+ * Selected time
+ * @param? selectedTime
+ */
+{template .selectedTime}
+    {if isNonnull($selectedTime)}
+        {$selectedTime.from} to {$selectedTime.to}, {$selectedTime.date}
+    {else}
+        Date and time are not selected yet
+    {/if}
+{/template}
+
+/**
+ * Calendar
+ * @param dayCells
+ * @param editable
+ */
+{template .calendar}
+    <div class="appointment__body">
+        <div class="calendar-outer">
+            <section class="calendar-wrap">
+                <div class="calendar">
+                    <div class="calendar__row calendar__row_days">
+                        <div class="calendar__cell">Sunday</div>
+                        <div class="calendar__cell">Monday</div>
+                        <div class="calendar__cell">Tuesday</div>
+                        <div class="calendar__cell">Wednesday</div>
+                        <div class="calendar__cell">Thursday</div>
+                        <div class="calendar__cell">Friday</div>
+                        <div class="calendar__cell">Saturday</div>
+                    </div>
+                    <div id="js-calendarBody">
+                        {call .calendarBody}
+                            {param dayCells: $dayCells /}
+                            {param editable: $editable /}
+                        {/call}
+                    </div>
+                </div>
+            </section>
+        </div>
+    </div>
+{/template}
+
+/**
+ * Calendar body
+ * @param dayCells
+ * @param editable
+ */
+{template .calendarBody}
+    <div class="calendar__col-wrapper">
+        {if isNonnull($dayCells)}
+            {foreach $dayCell in $dayCells}
+                <div class="calendar__col taDay">
+                    <div class="calendar__cell taLabel {if $dayCell.active} calendar__cell_date {else} calendar__cell_date_inactive {/if}
+                        ">{$dayCell.date}</div>
+                    <div class="calendar__col-inner">
+                        {foreach $timeCell in $dayCell.timeCells}
+                            {call .timeCell}
+                                {param timeCell: $timeCell /}
+                                {param editable: $editable /}
+                            {/call}
+                        {/foreach}
+                    </div>
+                </div>
+            {/foreach}
+        {/if}
+    </div>
+{/template}
+
+/**
+ * Time cell
+ * @param timeCell
+ * @param editable
+ */
+{template .timeCell}
+    {delcall timeCell variant="$timeCell.type"}
+        {param timeCell: $timeCell /}
+        {param editable: $editable /}
+    {/delcall}
+{/template}
+
+/**
+ * Empty time cell
+ * @param timeCell
+ * @param editable
+ */
+{deltemplate timeCell variant="'empty'"}
+    <div class="calendar__cell calendar__cell_empty"></div>
+{/deltemplate}
+
+/**
+ * Active time cell
+ * @param timeCell
+ * @param editable
+ */
+{deltemplate timeCell variant="'active'"}
+    <div id="js-timeCell-{$timeCell.id}" {if $editable} class="js-timeCell-active taAppointment" {/if}>
+        <div class="calendar__cell calendar__cell_active taLabel">{$timeCell.from} - {$timeCell.to}</div>
+    </div>
+{/deltemplate}
+
+/**
+ * Inactive time cell
+ * @param timeCell
+ * @param editable
+ */
+{deltemplate timeCell variant="'inactive'"}
+    <div class="calendar__cell">{$timeCell.from} - {$timeCell.to}</div>
+{/deltemplate}
+
+/**
+ * Current time cell
+ * @param timeCell
+ * @param editable
+ */
+{deltemplate timeCell variant="'current'"}
+    <div class="calendar__cell calendar__cell_current">{$timeCell.from} - {$timeCell.to}</div>
+{/deltemplate}
+
+/**
+ * Navigation
+ * @param previousEnabled
+ * @param nextEnabled
+ */
+{template .navigation}
+    <button class="nav-button nav-button_width_m nav-button_next_weeks">
+        <i class="nav-button__loader"></i>
+        <i class="nav-button__left-arrow {if $previousEnabled}js-previousWeek{else}nav-button__left-arrow_disabled{/if}"></i>
+        <i class="nav-button__right-arrow {if $nextEnabled}js-nextWeek{else}nav-button__right-arrow_disabled{/if}"></i>
+        <span class="nav-button__span nav-button__span_next_weeks-span">Next Weeks</span>
+    </button>
+{/template}

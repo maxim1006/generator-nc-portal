@@ -1,0 +1,15 @@
+{namespace com.netcracker.portal.blocks.formRadio}
+
+/**
+ * Form Radio
+ * @param field
+ */
+{template .view}
+    <label class="form-radio js-radio  taLabel taRadio taCheck taValue">
+        <input class="form-radio__input js-radio-input taEditElement" type="radio" name="{$field.id}" value="{$field.value}"
+            {if $field.isChecked}{sp}checked{/if}
+        />
+        <i class="form-radio__icon"></i>
+        <span class="form-radio__label">{$field.name}</span>
+    </label>
+{/template}

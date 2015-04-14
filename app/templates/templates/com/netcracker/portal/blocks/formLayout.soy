@@ -1,0 +1,79 @@
+{namespace com.netcracker.portal.blocks.formLayout}
+
+/**
+ * Form Layout
+ * @param fields
+ * @param? columns
+ */
+{template .view}
+    <div class="form__layout">
+        {foreach $field in $fields}
+            <div  {sp}
+            {if $field.component}
+                class="form__row js-uxComponent taParam"
+                data-component="{$field.component}"
+                {foreach $attr in $field.configuration}
+                 data-{$attr.name}="{$attr.value}"{sp}
+                {/foreach}
+             {else}
+                 class="form__row taParam"
+             {/if}
+            >
+           {if $field.type == 'hidden'}
+                {call com.netcracker.portal.blocks.formHidden.view}
+                    {param field: $field /}
+                {/call}
+                </div>
+           {else}
+                    <div class="form__column">
+                        {if $field.type != 'checkbox'}
+                            <label class="form-label{if $field.required} form-label_required{/if} taLabel" for="{$field.id}">{$field.name}</label>
+                        {/if}
+                    </div>
+                    <div class="form__column">
+                        {if $field.type == 'checkbox'}
+                            {call com.netcracker.portal.blocks.formCheckbox.view}
+                                {param field: $field /}
+                            {/call}
+                        {elseif $field.type == 'radio'}
+                            {call com.netcracker.portal.blocks.formRadio.view}
+                                {param field: $field /}
+                            {/call}
+                        {elseif $field.type == 'select'}
+                            {call com.netcracker.portal.blocks.formSelect.view}
+                                {param field: $field /}
+                            {/call}
+                        {elseif $field.type == 'address'}
+                            {call com.netcracker.portal.blocks.formAddress.view}
+                                {param field: $field /}
+                            {/call}
+                        {elseif $field.type == 'textarea'}
+                            {call com.netcracker.portal.blocks.formTextarea.view}
+                                {param field: $field /}
+                            {/call}
+                        {else}
+                            {call com.netcracker.portal.blocks.formInput.view}
+                                {param field: $field /}
+                            {/call}
+                        {/if}
+                        {if $field.options}
+                            <div class="form-checkbox-list taCheckGroup taValue">
+                                {foreach $option in $field.options}
+                                    {call com.netcracker.portal.blocks.formCheckbox.view}
+                                        {param field: $option /}
+                                    {/call}
+                                {/foreach}
+                            </div>
+                        {/if}
+                    </div>
+                    {if $columns == 3}
+                        <div class="form__column">
+                            {if $field.hint}<span class="form__hint">{$field.hint}</span>{/if}
+                        </div>
+                    {/if}
+                </div>
+
+           {/if}
+        {/foreach}
+    </div>
+{/template}
